@@ -4,6 +4,11 @@ module.exports = {
     mode: 'development',
     devtool: 'inline-source-map',
     devServer: {
-        contentBase: path.resolve(__dirname, '../dist'),
+        open: true,
+        hot: true,
+        port: 8080,
+        static: {
+            directory: path.join(__dirname, 'public'),
+          },
     },
 };
