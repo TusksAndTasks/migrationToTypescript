@@ -19,6 +19,7 @@
     },
     "rules": {
         "no-debugger": "off",
+        "no-explicit-any": "warn",
         "no-console": 0,
         "class-methods-use-this": "off",
         "prettier/prettier": [

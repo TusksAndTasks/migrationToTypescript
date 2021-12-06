@@ -1,4 +1,4 @@
-import {mainData} from "../view/news/interfaces"
+import { mainResponse, Callback, sourceResponse} from "../view/news/interfaces"
 
 class Loader {
      private baseLink: string; 
@@ -11,7 +11,7 @@ class Loader {
 
     getResp(
         { endpoint, options = {} }: { endpoint: string, options?: {sources?: string}},
-        callback = (data? : mainData ): void => {
+        callback: Callback<any> = ()=> {
             console.error('No callback for GET response');
         }
     ) {
@@ -25,7 +25,7 @@ class Loader {
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
             throw Error(res.statusText);
         }
-
+        console.log(res)
         return res;
     }
 
@@ -41,13 +41,13 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(method : string, endpoint : string, callback = (data? : mainData ): void => {}, options: {sources?: string}) {
+    load(method : string, endpoint : string, callback: Callback<mainResponse | sourceResponse>, options: {sources?: string}) {
         console.log(options);
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => (<Response>res).json())
-            .then((data) => callback(data))
-            .catch((err) => console.error(err));
+            .then((data: mainResponse | sourceResponse) => callback(data))
+            .catch((err: Error) => console.error(err));
     }
 }
 
