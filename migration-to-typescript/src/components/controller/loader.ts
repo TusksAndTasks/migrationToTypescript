@@ -11,7 +11,7 @@ class Loader {
 
     getResp(
         { endpoint, options = {} }: { endpoint: string, options?: {sources?: string}},
-        callback: Callback<any> = ()=> {
+        callback: Callback<sourceResponse | mainResponse> = ()=> {
             console.error('No callback for GET response');
         }
     ) {
@@ -25,7 +25,6 @@ class Loader {
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
             throw Error(res.statusText);
         }
-        console.log(res)
         return res;
     }
 
@@ -41,8 +40,7 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(method : string, endpoint : string, callback: Callback<mainResponse | sourceResponse>, options: {sources?: string}) {
-        console.log(options);
+    load(method : string, endpoint : string, callback: Callback<sourceResponse | mainResponse>, options: {sources?: string}) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => (<Response>res).json())

@@ -13,14 +13,14 @@ export type Callback<T> = { (data: T): void}
 
 
 export interface mainResponse {
-    articles: mainData[];
-    status: string;
-    totalResults: number;
+    articles?: mainData[];
+    status?: string;
+    totalResults?: number;
 }
 
 export interface sourceResponse {
-    sources: sourceData[];
-    status: string;
+    sources?: sourceData[];
+    status?: string;
 }
 
 export interface sourceData {
