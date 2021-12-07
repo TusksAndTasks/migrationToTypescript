@@ -19,7 +19,7 @@
     },
     "rules": {
         "no-debugger": "off",
-        "no-explicit-any": "warn",
+        "@typescript-eslint/no-explicit-any": "error",
         "no-console": 0,
         "class-methods-use-this": "off",
         "prettier/prettier": [
